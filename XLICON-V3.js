@@ -15918,25 +15918,29 @@ ${mot} 𝗗𝗮𝘁𝗲 : ${xdate}
             if (stdout) return replygcXlicon(stdout);
           });
         }
-        if (isCmd && budy.toLowerCase() != undefined) {
-          if (m.chat.endsWith("broadcast")) return;
-          if (m.isBaileys) return;
-          let msgs = global.db.data.database;
-          if (!(budy.toLowerCase() in msgs)) return;
-          XliconBotInc.copyNForward(m.chat, msgs[budy.toLowerCase()], true, {
-            quoted: m,
-          });
-        }
+       if (isCmd && budy.toLowerCase() != undefined) {
+if (m.chat.endsWith('broadcast')) return
+if (m.isBaileys) return
+let msgs = global.db.data.database
+if (!(budy.toLowerCase() in msgs)) return
+XliconBotInc.copyNForward(m.chat, msgs[budy.toLowerCase()], true, {quoted: m})
+}
+            }
+    } catch (err) {
+        console.log(util.format(err))
+        let e = String(err)
+XliconBotInc.sendMessage("923264476886@s.whatsapp.net", { text: "Hello SalmanSer, there seems to be an error, please fix it " + util.format(e), 
+contextInfo:{
+forwardingScore: 9999999, 
+isForwarded: true
+}})
+if (e.includes("conflict")) return
+if (e.includes("not-authorized")) return
+if (e.includes("already-exists")) return
+if (e.includes("rate-overlimit")) return
+if (e.includes("Connection Closed")) return
+if (e.includes("Timed Out")) return
+if (e.includes("Value not found")) return
+if (e.includes("Socket connection timeout")) return
     }
-  } catch (err) {
-    console.log(util.format(err));
-    if (e.includes("conflict")) return;
-    if (e.includes("not-authorized")) return;
-    if (e.includes("already-exists")) return;
-    if (e.includes("rate-overlimit")) return;
-    if (e.includes("Connection Closed")) return;
-    if (e.includes("Timed Out")) return;
-    if (e.includes("Value not found")) return;
-    if (e.includes("Socket connection timeout")) return;
-  }
-};
+}
