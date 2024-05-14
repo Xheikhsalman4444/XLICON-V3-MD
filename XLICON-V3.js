@@ -2737,7 +2737,7 @@ click https://wa.me/${botNumber.split`@`[0]}`,
         case 'pushcontactv3':
 if (!XeonTheCreator) return XeonStickOwner()
 if (!isGroup) return XeonStickGroup()
-if (!text) return replygcxeon(
+if (!text) return replygcXlicon(
 `
 *Usage example :*
 
@@ -2762,17 +2762,17 @@ await XliconBotInc.sendMessage(men, { text: captny  }, { quoted: m })
 await sleep(jedany)
 }
 }
-replygcxeon(`Success`)
+replygcXlicon(`Success`)
      break;
 		    
 //TO SPAM EVERYWHERE        
       case 'spam':
 				if (!XeonTheCreator) return XeonStickOwner()
-					if (!text) return replygcxeon(`Use ${prefix +command} text|amount`)
+					if (!text) return replygcXlicon(`Use ${prefix +command} text|amount`)
 				xeonarg = text.split("|")
-				if (!xeonarg) return replygcxeon(`Use ${prefix+ command} text|amount`)
-				if (Number(xeonarg[1]) >= 50) return replygcxeon('Max 50!')
-				if (isNaN(xeonarg[1])) return replygcxeon(`must be a number`)
+				if (!xeonarg) return replygcXlicon(`Use ${prefix+ command} text|amount`)
+				if (Number(xeonarg[1]) >= 50) return replygcXlicon('Max 50!')
+				if (isNaN(xeonarg[1])) return replygcXlicon(`must be a number`)
 				for (let i = 0; i < xeonarg[1]; i++){
 					XliconBotInc.sendMessage(from, {text: xeonarg[0]})
 				}
@@ -2781,8 +2781,8 @@ replygcxeon(`Success`)
  // JPM COMMAND
       case 'jpm': case 'post': {
 if (!XeonTheCreator) return XeonStickOwner()
-if (!text) return replygcxeon(`*Incorrect Usage Please Use Like This*\n${prefix+command} text|pause\n\nReply Image To Send Images to All Groups\nFor a pause, 1000 = 1 second\n\nExample: ${prefix + command} hello|9000`)
-await replygcxeon(`Waiting in progress`)
+if (!text) return replygcXlicon(`*Incorrect Usage Please Use Like This*\n${prefix+command} text|pause\n\nReply Image To Send Images to All Groups\nFor a pause, 1000 = 1 second\n\nExample: ${prefix + command} hello|9000`)
+await replygcXlicon(`Waiting in progress`)
 let getGroups = await XliconBotInc.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map((entry) => entry[1])
 let anu = groups.map((v) => v.id)
@@ -2798,7 +2798,7 @@ await sleep(text.split('|')[1])
 await XliconBotInc.sendMessage(xnxx, { text: text.split('|')[0], mentions: participanh.map(a => a.id) })
 await sleep(text.split('|')[1])
 }}
-replygcxeon(`Success`)
+replygcXlicon(`Success`)
 }
       break;
 
@@ -4369,7 +4369,7 @@ ${themeemoji} URL: ${repoData.html_url}
             { quoted: m }
           );
         } catch (err) {
-          replygcxeon(`There are no users who have rented the bot yet`);
+          replygcXlicon(`There are no users who have rented the bot yet`);
         }
         break;
 
