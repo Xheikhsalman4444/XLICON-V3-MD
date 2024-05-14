@@ -2809,6 +2809,19 @@ XliconBotInc.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTime
 }
       break;
 
+//FOR AUTOSTICKER
+      case 'autosticker': case 'autostickergc':
+if (!XeonTheCreator) return XeonStickOwner()
+                if (args.length < 1) return replygcxeon(`Example ${prefix + command} on/off`)
+                if (q == 'on') {
+                    db.data.settings[botNumber].autosticker = true
+                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
+                } else if (q == 'off') {
+                    db.data.settings[botNumber].autosticker = false
+                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
+                }
+            break;		    
+
 //PIN OR UNPINCHAT
       case 'pinchat': {
 if (!XeonTheCreator) return XeonStickOwner()
