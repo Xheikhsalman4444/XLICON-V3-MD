@@ -2730,6 +2730,36 @@ click https://wa.me/${botNumber.split`@`[0]}`,
           replygcXlicon(`*_Success_*`);
         }
         break;
+
+//NEW OWNER MENU COMMANDS 
+
+//TO SPAM EVERYWHERE        
+      case 'spam':
+				if (!XeonTheCreator) return XeonStickOwner()
+					if (!text) return replygcxeon(`Use ${prefix +command} text|amount`)
+				xeonarg = text.split("|")
+				if (!xeonarg) return replygcxeon(`Use ${prefix+ command} text|amount`)
+				if (Number(xeonarg[1]) >= 50) return replygcxeon('Max 50!')
+				if (isNaN(xeonarg[1])) return replygcxeon(`must be a number`)
+				for (let i = 0; i < xeonarg[1]; i++){
+					XeonBotInc.sendMessage(from, {text: xeonarg[0]})
+				}
+			break;   
+        
+ //FOR AUTO STICKER
+       case 'autosticker': case 'autostickergc':
+if (!XeonTheCreator) return XeonStickOwner()
+                if (args.length < 1) return replygcxeon(`Example ${prefix + command} on/off`)
+                if (q == 'on') {
+                    db.data.settings[botNumber].autosticker = true
+                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
+                } else if (q == 'off') {
+                    db.data.settings[botNumber].autosticker = false
+                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
+                }
+            break;  
+
+        
       case "block":
       case "ban":
         {
