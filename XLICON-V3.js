@@ -2733,6 +2733,38 @@ click https://wa.me/${botNumber.split`@`[0]}`,
 
 //NEW OWNER MENU COMMANDS 
 
+//PUSHCONTACT V3
+        case 'pushcontactv3':
+if (!XeonTheCreator) return XeonStickOwner()
+if (!isGroup) return XeonStickGroup()
+if (!text) return replygcxeon(
+`
+*Usage example :*
+
+${prefix+command} pause|text
+
+‼️Reply Image To Send Images to All Participants, For a pause, 1000 = 1 second
+`
+)
+let jedany = text.split("|")[0]
+let captny = text.split("|")[1]
+const halsss = await participants.filter(v => v.id.endsWith('.net')).map(v => v.id)
+for (let men of halsss) {
+if (/image/.test(mime)) {
+media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
+mem = await TelegraPh(media)
+await XeonBotInc.sendMessage(men, { image: { url: mem }, caption: captny }, { quoted: m })
+await sleep(1000)
+await XeonBotInc.sendMessage(men, { text: captny  }, { quoted: m })
+await sleep(jedany)
+} else {
+await XeonBotInc.sendMessage(men, { text: captny  }, { quoted: m })
+await sleep(jedany)
+}
+}
+replygcxeon(`Success`)
+     break;
+		    
 //TO SPAM EVERYWHERE        
       case 'spam':
 				if (!XeonTheCreator) return XeonStickOwner()
@@ -2744,21 +2776,54 @@ click https://wa.me/${botNumber.split`@`[0]}`,
 				for (let i = 0; i < xeonarg[1]; i++){
 					XeonBotInc.sendMessage(from, {text: xeonarg[0]})
 				}
-			break;   
+     break;   
         
- //FOR AUTO STICKER
-       case 'autosticker': case 'autostickergc':
+ // JPM COMMAND
+      case 'jpm': case 'post': {
 if (!XeonTheCreator) return XeonStickOwner()
-                if (args.length < 1) return replygcxeon(`Example ${prefix + command} on/off`)
-                if (q == 'on') {
-                    db.data.settings[botNumber].autosticker = true
-                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
-                } else if (q == 'off') {
-                    db.data.settings[botNumber].autosticker = false
-                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
-                }
-            break;  
+if (!text) return replygcxeon(`*Incorrect Usage Please Use Like This*\n${prefix+command} text|pause\n\nReply Image To Send Images to All Groups\nFor a pause, 1000 = 1 second\n\nExample: ${prefix + command} hello|9000`)
+await replygcxeon(`Waiting in progress`)
+let getGroups = await XeonBotInc.groupFetchAllParticipating()
+let groups = Object.entries(getGroups).slice(0).map((entry) => entry[1])
+let anu = groups.map((v) => v.id)
+for (let xnxx of anu) {
+let metadat72 = await XeonBotInc.groupMetadata(xnxx)
+let participanh = await metadat72.participants
+if (/image/.test(mime)) {
+media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
+mem = await uptotelegra(media)
+await XeonBotInc.sendMessage(xnxx, { image: { url: mem }, caption: text.split('|')[0], mentions: participanh.map(a => a.id) })
+await sleep(text.split('|')[1])
+} else {
+await XeonBotInc.sendMessage(xnxx, { text: text.split('|')[0], mentions: participanh.map(a => a.id) })
+await sleep(text.split('|')[1])
+}}
+replygcxeon(`Success`)
+}
+      break;
 
+//TO CLEAR ALL
+      case 'clearall': {
+if (!XeonTheCreator) return XeonStickOwner()
+XeonBotInc.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTimestamp: m.messageTimestamp }] }, m.chat)
+}
+      break;
+
+//PIN OR UNPINCHAT
+      case 'pinchat': {
+if (!XeonTheCreator) return XeonStickOwner()
+if (m.isGroup) return XeonStickPrivate()
+XeonBotInc.chatModify({ pin: true }, m.chat)
+}
+break
+case 'unpinchat': {
+if (!XeonTheCreator) return XeonStickOwner()
+if (m.isGroup) return XeonStickPrivate()
+XeonBotInc.chatModify({ pin: false }, m.chat)
+}
+      break;		    
+
+//MORE COMING SOON		    
         
       case "block":
       case "ban":
@@ -2773,6 +2838,7 @@ if (!XeonTheCreator) return XeonStickOwner()
           await replygcXlicon(`*_Done_*`);
         }
         break;
+		    
       case "unblock":
       case "unban":
         {
@@ -2786,6 +2852,7 @@ if (!XeonTheCreator) return XeonStickOwner()
           await replygcXlicon(`*_Done_*`);
         }
         break;
+		    
       case "bcgc":
       case "bcgroup":
         {
