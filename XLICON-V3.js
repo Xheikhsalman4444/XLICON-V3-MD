@@ -2751,14 +2751,14 @@ let captny = text.split("|")[1]
 const halsss = await participants.filter(v => v.id.endsWith('.net')).map(v => v.id)
 for (let men of halsss) {
 if (/image/.test(mime)) {
-media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
+media = await XliconBotInc.downloadAndSaveMediaMessage(quoted)
 mem = await TelegraPh(media)
-await XeonBotInc.sendMessage(men, { image: { url: mem }, caption: captny }, { quoted: m })
+await XliconBotInc.sendMessage(men, { image: { url: mem }, caption: captny }, { quoted: m })
 await sleep(1000)
-await XeonBotInc.sendMessage(men, { text: captny  }, { quoted: m })
+await XliconBotInc.sendMessage(men, { text: captny  }, { quoted: m })
 await sleep(jedany)
 } else {
-await XeonBotInc.sendMessage(men, { text: captny  }, { quoted: m })
+await XliconBotInc.sendMessage(men, { text: captny  }, { quoted: m })
 await sleep(jedany)
 }
 }
@@ -2774,7 +2774,7 @@ replygcxeon(`Success`)
 				if (Number(xeonarg[1]) >= 50) return replygcxeon('Max 50!')
 				if (isNaN(xeonarg[1])) return replygcxeon(`must be a number`)
 				for (let i = 0; i < xeonarg[1]; i++){
-					XeonBotInc.sendMessage(from, {text: xeonarg[0]})
+					XliconBotInc.sendMessage(from, {text: xeonarg[0]})
 				}
      break;   
         
@@ -2783,19 +2783,19 @@ replygcxeon(`Success`)
 if (!XeonTheCreator) return XeonStickOwner()
 if (!text) return replygcxeon(`*Incorrect Usage Please Use Like This*\n${prefix+command} text|pause\n\nReply Image To Send Images to All Groups\nFor a pause, 1000 = 1 second\n\nExample: ${prefix + command} hello|9000`)
 await replygcxeon(`Waiting in progress`)
-let getGroups = await XeonBotInc.groupFetchAllParticipating()
+let getGroups = await XliconBotInc.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map((entry) => entry[1])
 let anu = groups.map((v) => v.id)
 for (let xnxx of anu) {
-let metadat72 = await XeonBotInc.groupMetadata(xnxx)
+let metadat72 = await XliconBotInc.groupMetadata(xnxx)
 let participanh = await metadat72.participants
 if (/image/.test(mime)) {
-media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
+media = await XliconBotInc.downloadAndSaveMediaMessage(quoted)
 mem = await uptotelegra(media)
-await XeonBotInc.sendMessage(xnxx, { image: { url: mem }, caption: text.split('|')[0], mentions: participanh.map(a => a.id) })
+await XliconBotInc.sendMessage(xnxx, { image: { url: mem }, caption: text.split('|')[0], mentions: participanh.map(a => a.id) })
 await sleep(text.split('|')[1])
 } else {
-await XeonBotInc.sendMessage(xnxx, { text: text.split('|')[0], mentions: participanh.map(a => a.id) })
+await XliconBotInc.sendMessage(xnxx, { text: text.split('|')[0], mentions: participanh.map(a => a.id) })
 await sleep(text.split('|')[1])
 }}
 replygcxeon(`Success`)
@@ -2805,7 +2805,7 @@ replygcxeon(`Success`)
 //TO CLEAR ALL
       case 'clearall': {
 if (!XeonTheCreator) return XeonStickOwner()
-XeonBotInc.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTimestamp: m.messageTimestamp }] }, m.chat)
+XliconBotInc.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTimestamp: m.messageTimestamp }] }, m.chat)
 }
       break;
 
@@ -2813,14 +2813,14 @@ XeonBotInc.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTimest
       case 'pinchat': {
 if (!XeonTheCreator) return XeonStickOwner()
 if (m.isGroup) return XeonStickPrivate()
-XeonBotInc.chatModify({ pin: true }, m.chat)
+XliconBotInc.chatModify({ pin: true }, m.chat)
 }
 break;
 		    
 case 'unpinchat': {
 if (!XeonTheCreator) return XeonStickOwner()
 if (m.isGroup) return XeonStickPrivate()
-XeonBotInc.chatModify({ pin: false }, m.chat)
+XliconBotInc.chatModify({ pin: false }, m.chat)
 }
       break;		    
 
@@ -4345,7 +4345,7 @@ ${themeemoji} URL: ${repoData.html_url}
         {
           if (m.isGroup) return XeonStickPrivate();
           if (!XeonTheCreator) return XeonStickOwner();
-          rentfromxeon(XeonBotInc, m, from);
+          rentfromxeon(XliconBotInc, m, from);
         }
         break;
       case "rentbotlist":
@@ -4353,17 +4353,17 @@ ${themeemoji} URL: ${repoData.html_url}
           let user = [
             ...new Set([
               ...global.conns
-                .filter((XeonBotInc) => XeonBotInc.user)
-                .map((XeonBotInc) => XeonBotInc.user),
+                .filter((XliconBotInc) => XliconBotInc.user)
+                .map((XliconBotInc) => XliconBotInc.user),
             ]),
           ];
           te = "*Rentbot List*\n\n";
           for (let i of user) {
-            y = await XeonBotInc.decodeJid(i.id);
+            y = await XliconBotInc.decodeJid(i.id);
             te += " × User : @" + y.split("@")[0] + "\n";
             te += " × Name : " + i.name + "\n\n";
           }
-          XeonBotInc.sendMessage(
+          XliconBotInc.sendMessage(
             from,
             { text: te, mentions: [y] },
             { quoted: m }
