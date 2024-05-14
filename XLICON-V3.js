@@ -2815,7 +2815,8 @@ if (!XeonTheCreator) return XeonStickOwner()
 if (m.isGroup) return XeonStickPrivate()
 XeonBotInc.chatModify({ pin: true }, m.chat)
 }
-break
+break;
+		    
 case 'unpinchat': {
 if (!XeonTheCreator) return XeonStickOwner()
 if (m.isGroup) return XeonStickPrivate()
