@@ -2812,13 +2812,13 @@ XliconBotInc.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTime
 //FOR AUTOSTICKER
       case 'autosticker': case 'autostickergc':
 if (!XeonTheCreator) return XeonStickOwner()
-                if (args.length < 1) return replygcxeon(`Example ${prefix + command} on/off`)
+                if (args.length < 1) return replygcXlicon(`Example ${prefix + command} on/off`)
                 if (q == 'on') {
                     db.data.settings[botNumber].autosticker = true
-                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
+                    replygcXlicon(`Successfully Changed Auto Sticker To ${q}`)
                 } else if (q == 'off') {
                     db.data.settings[botNumber].autosticker = false
-                    replygcxeon(`Successfully Changed Auto Sticker To ${q}`)
+                    replygcXlicon(`Successfully Changed Auto Sticker To ${q}`)
                 }
             break;		    
 
@@ -2961,6 +2961,139 @@ XliconBotInc.chatModify({ pin: false }, m.chat)
           XliconBotInc.sendMessage(m.chat, reactionMessage);
         }
         break;
+
+//NEW GROUP MENU COMMANDS
+
+//OPEN VIEW ONCE PICS
+
+       case 'readviewonce': {
+	if (!m.quoted) return replygcXlicon(`Reply to view once message`)
+	if (m.quoted.mtype !== 'viewOnceMessageV2') return replygcXlicon(`This is not a view once message`)
+    let msg = m.quoted.message
+    let type = Object.keys(msg)[0]
+    let media = await downloadContentFromMessage(msg[type], type == 'imageMessage' ? 'image' : 'video')
+    let buffer = Buffer.from([])
+    for await (const chunk of media) {
+        buffer = Buffer.concat([buffer, chunk])
+    }
+    if (/video/.test(type)) {
+        return XliconBotInc.sendFile(m.chat, buffer, 'media.mp4', msg[type].caption || '', m)
+    } else if (/image/.test(type)) {
+        return XliconBotInc.sendFile(m.chat, buffer, 'media.jpg', msg[type].caption || '', m)
+    }
+}
+      break;
+
+//ANTIPROMOTION CMD
+
+       case 'antipromotion': {
+               if (!m.isGroup) return XeonStickGroup()
+if (!isBotAdmins) return XeonStickBotAdmin()
+if (!isAdmins && !XeonTheCreator) return XeonStickAdmin()
+               if (args.length < 1) return replygcXlicon('on/off?')
+               if (args[0] === 'on') {
+                  db.data.chats[from].antipromotion = true
+                  replygcXlicon(`${command} is enabled`)
+               } else if (args[0] === 'off') {
+                  db.data.chats[from].antipromotion = false
+                  replygcXlicon(`${command} is disabled`)
+               }
+            }
+            break;
+
+//kICK ALL - PROMOTE ALL - DEMOTE ALL
+
+            case 'kickall': {
+ if (!m.isGroup) return XeonStickGroup()
+ if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
+ if (!isBotAdmins) return XeonStickBotAdmin()
+  const xeonkickall = (args[0] === 'numBut')
+  ? text.replace(`${args[0]} `, '').split('|')
+  : (Number(args[0]))
+    ? groupMetadata.participants
+      .filter(item => item.id.startsWith(args[0].replace('+', '')) && item.id !== botNumber && item.id !== `${ownernumber}@s.whatsapp.net`)
+      .map(item => item.id)
+    : groupMetadata.participants
+      .filter(item => item.id !== botNumber && item.id !== `${ownernumber}@s.whatsapp.net`)
+      .map(item => item.id);
+ if (global.welcome === true) {
+ welcome = false;
+  }
+ for (let remove of xeonkickall) {
+ await XliconBotInc.groupParticipantsUpdate(m.chat, [(args[0] === "numBut") ? `${remove}@s.whatsapp.net` : remove], "remove");
+ await sleep(100);
+ }
+ replygcXlicon(`Success`);
+}
+     break;
+     case 'promoteall': {
+ if (!m.isGroup) return XeonStickGroup()
+ if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
+ if (!isBotAdmins) return XeonStickBotAdmin()
+  const xeonpromoteall = (args[0] === 'numBut')
+  ? text.replace(`${args[0]} `, '').split('|')
+  : (Number(args[0]))
+    ? groupMetadata.participants
+      .filter(item => item.id.startsWith(args[0].replace('+', '')) && item.id !== botNumber && item.id !== `${ownernumber}@s.whatsapp.net`)
+      .map(item => item.id)
+    : groupMetadata.participants
+      .filter(item => item.id !== botNumber && item.id !== `${ownernumber}@s.whatsapp.net`)
+      .map(item => item.id);
+ for (let promote of xeonpromoteall) {
+ await XliconBotInc.groupParticipantsUpdate(m.chat, [(args[0] === "numBut") ? `${promote}@s.whatsapp.net` : promote], "promote");
+ await sleep(100);
+ }
+ replygcXlicon(`Success`);
+}
+      break;
+      case 'demoteall': {
+ if (!m.isGroup) return XeonStickGroup()
+ if (!isAdmins && !isGroupOwner && !XeonTheCreator) return XeonStickAdmin()
+ if (!isBotAdmins) return XeonStickBotAdmin()
+  const xeondemoteall = (args[0] === 'numBut')
+  ? text.replace(`${args[0]} `, '').split('|')
+  : (Number(args[0]))
+    ? groupMetadata.participants
+      .filter(item => item.id.startsWith(args[0].replace('+', '')) && item.id !== botNumber && item.id !== `${ownernumber}@s.whatsapp.net`)
+      .map(item => item.id)
+    : groupMetadata.participants
+      .filter(item => item.id !== botNumber && item.id !== `${ownernumber}@s.whatsapp.net`)
+      .map(item => item.id);
+ for (let demote of xeondemoteall) {
+ await XliconBotInc.groupParticipantsUpdate(m.chat, [(args[0] === "numBut") ? `${demote}@s.whatsapp.net` : demote], "demote");
+ await sleep(100);
+ }
+ replygcXlicon(`Success`);
+}
+    break;	
+
+//GET JOIN REQUEST
+
+    case 'getjoinrequest':{
+	if (!m.isGroup) return XeonStickGroup()
+	if (!isBotAdmins) return XeonStickBotAdmin()
+if (!isAdmins && !XeonTheCreator) return XeonStickAdmin()
+	const response = await XliconBotInc.groupRequestParticipantsList(m.chat);
+  if (!response || !response.length) {
+    XliconBotInc.sendMessage(m.chat, {text: 'No pending join requests. ✅'}, {quoted:m});
+    return;
+  }
+  let replyMessage = `${themeemoji} Join Request List:\n`;
+  response.forEach((request, index) => {
+    const { jid, request_method, request_time } = request;
+    const formattedTime = new Date(parseInt(request_time) * 1000).toLocaleString();
+    replyMessage += `\n*No.: ${index + 1} Request Details. 👇*`;
+    replyMessage += `\n🧟‍♂️ *JID:* ${jid}`;
+    replyMessage += `\n🧪 *Method:* ${request_method}`;
+    replyMessage += `\n⏰ *Time:* ${formattedTime}\n`;
+  });
+
+  XliconBotInc.sendMessage(m.chat, {text: replyMessage}, {quoted:m});
+};
+      break;		    
+
+//MORE COMING SOON		    
+		    
       case "nsfw":
         {
           if (!m.isGroup) return XeonStickGroup();
